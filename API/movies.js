@@ -2,7 +2,7 @@ let list = document.querySelector('.list')
 let detail = document.querySelector('.detail')
 
 
-fetch('http://www.omdbapi.com/?s=salt&apikey='+'afdcb997')
+fetch('http://www.omdbapi.com/&apikey='+'afdcb997')
 .then(function(response){
   return response.json()
 }).then(function(movies){
