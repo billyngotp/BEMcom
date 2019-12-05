@@ -1,47 +1,32 @@
-import React from "react"
+import React from 'react'
 
-class Query extends React.Component{
-    constructor(props){
+class Query extends React.Component {
+    constructor(props) {
         super(props);
-        this.state = {
-            text: "",
-            searchInput: "",
-        }
-        this.setSearch = this.setSearch.bind(this)
-        this.handleInput = this.handleInput.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleQueryInput = this.handleQueryInput.bind(this);
+    }
+    handleSubmit(event) {
+        event.preventDefault();
+        this.props.handleSearch()
     }
 
-    handleInput = text => {
-        this.setState({text})
-    }
-
-    setSearch = () => {
-        this.setState({searchInput: this.state.text})
+    handleQueryInput(event) {
+        this.props.handleInput(event)
     }
 
     render(){
-        return(
+        return (
             <div>
-                <SearchField changed={this.handleInput}/>
-                <ConfirmedSearch changed={this.setSearch}/>
-                <label>{this.state.searchInput}</label>
+                <form onSubmit = {this.handleSubmit}>
+                    <label>
+                        <input type = "text" placeholder = "Search" onChange = {this.handleQueryInput}/> 
+                    </label>
+                        <input type = "submit" /> 
+                </form>
             </div>
         )
     }
 }
-
-function SearchField(props){
-    function change(e) {
-        props.changed(e.target.value);
-    }
-    return(
-        <input id = "input" onChange = {change}/>
-    )
-}
-
-function ConfirmedSearch(props) {
-    console.log(document.getElementById("input"))
-    return <button onClick={props.changed}> Search </button>
-}
-
-export default Query;
+    
+export default Query
