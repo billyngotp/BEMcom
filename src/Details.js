@@ -6,51 +6,51 @@ import {
     Link
   } from "react-router-dom";
  
-function Details() {
-        return (
-            <div>
-                <Router>
-                    <nav>
-                        <h2> BEM Movies </h2>
-
-                        <ul>
-                            <li> <Link to="/">Details</Link> </li>
-                            <li> <Link to="/castandcrew">Cast and Crew</Link> </li>
-                            <li> <Link to="/trailers">Trailer</Link> </li>
-                            <li> <Link to="/store">Store</Link> </li>
-                        </ul>
-                    </nav>
+const Details = (props) => {
+    const {Title:title, Type:type, Year:year, imdbID:id, Poster:pic} = props.search
+    console.log(props, type , year, id)
+    return (
+        <div>
+            <h2> BEM Movies </h2>
             
-                    {/* A <Switch> looks through its children <Route>s and
-                        renders the first one that matches the current URL. */}
-                    <Switch>
-                    <Route path="/castandcrew">
-                        <Cast/>
-                    </Route>
-                    <Route path="/trailers">
-                        <Trailers />
-                    </Route>
-                    <Route path ="/store">
-                        <Store />
-                    </Route>
-                    <Route path="/">
-                        <Info />
-                    </Route>
-                    </Switch>
-                </Router>
-            </div>
-        );
-    }   
+            <Router>
+                <Switch>
+                <Route path="/castandcrew">
+                    <Cast />
+                </Route>
+                <Route path="/trailers">
+                    <Trailers />
+                </Route>
+                {/* <Route path ="/store">
+                    <Store />
+                </Route> */}
+                <Route path="/">
+                    <Info />
+                </Route>
+                </Switch>
 
+                <nav>
+                    <ul>
+                        <p> <Link to="/">Details</Link> </p>
+                        <p> <Link to="/castandcrew">Cast and Crew</Link> </p>
+                        <p> <Link to="/trailers">Trailer</Link> </p>
+                        {/* <p> <Link to="/store">Store</Link> </p> */}
+                    </ul>
+                </nav>
+
+            </Router>
+        </div>
+    );
+
+}
+ 
 
 function Info(props) {
+    //console.log("This is in the info" + props[0])
     return (
-      <div> 
-        <h2> Populate information using the fetch API</h2> 
-        <p> Function : displaySynopsis </p>
-        <p> Function : displayReleaseDate </p>
-        <p> Function : displayGenre </p>
-        <p> Function : displayStores </p>
+      <div>  
+        <h2> Information </h2>
+        <p> {props.title} </p>
       </div>
     )
 }
@@ -59,10 +59,7 @@ function Cast(props) {
     return (
         <div>
             <h2>This is the Cast and Crew</h2>
-            <p> Function : searchMovieDetails </p>
-            <p> Function : displayMovieCast</p>
-            <p> Function : displayCastName</p>
-            <p> Function : displayCastPictures</p>
+            <p> {props.title} </p>
         </div>
     )
 }
@@ -71,7 +68,7 @@ function Trailers(props) {
     return (
       <div>
         <h2> This will call fetch function for trailers</h2>
-        <p> Function : fetchMovies </p>
+        <p> {props.title} </p>
       </div>
     )
 }
@@ -79,11 +76,8 @@ function Trailers(props) {
 function Store(props) {
     return(
       <div>
-        <h2> This is where I go to buy movies</h2>
-        {/* insert call function PopulateBuyLinks */}
-        <p> Function : populateBuyLinks </p>
-        {/* insert URL for Movies */}
-        <a href = "url.com" > Function : linkofMovies </a>
+        <h2> Store </h2>
+        <p> {props.title} </p>
       </div>
     ) 
 }
