@@ -7,7 +7,7 @@ import {
   } from "react-router-dom";
  
 const Details = (props) => {
-    const {Title:title, Type:type, Year:year, imdbID:id, Poster:picture} = props.search
+    const {Title:title, Type:type, Year:year, imdbID:id, Poster:pic} = props.search
     console.log(props, type , year, id)
     return (
         <div>
