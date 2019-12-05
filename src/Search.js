@@ -22,7 +22,7 @@ class Search extends React.Component{
         this.setState({desiredSearch:id})
         const component = this
         const apiKey = '749d54f1'
-        const url = 'http://www.omdbapi.com/?i=tt3896198&apikey=' + apiKey + '&i=' + this.state.desiredSearch
+        const url = 'https://www.omdbapi.com/?i=tt3896198&apikey=' + apiKey + '&i=' + this.state.desiredSearch
         fetch(url)
         .then(response => response.json())
         .then(response => component.setState ({uniqueSearch:response.Search}))
@@ -38,7 +38,7 @@ class Search extends React.Component{
     handleSearch() {
         const component = this
         const apiKey = '749d54f1'
-        const url = 'http://www.omdbapi.com/?i=tt3896198&apikey=' + apiKey + '&s=' + this.state.searchInput
+        const url = 'https://www.omdbapi.com/?i=tt3896198&apikey=' + apiKey + '&s=' + this.state.searchInput
         fetch(url)
         .then(response => response.json())
         .then(response => component.setState ({results:response.Search}))
