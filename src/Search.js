@@ -1,5 +1,5 @@
 import React from 'react';
-//import Details from './Details';
+import Details from './Details';
 import Query from './Query';
 import MoviePics from './MoviePics';
 
@@ -17,32 +17,33 @@ class Search extends React.Component{
         this.handleDesiredSearch = this.handleDesiredSearch.bind(this);
     }
 
+    //Handle the on click when user selects a movie, fetch the single movie details
     handleDesiredSearch(id) {
-        console.log(id)
         this.setState({desiredSearch:id})
         const component = this
         const apiKey = '749d54f1'
-        const url = 'https://www.omdbapi.com/?i=tt3896198&apikey=' + apiKey + '&i=' + this.state.desiredSearch
+        const url = 'https://www.omdbapi.com/?i=' + id + '&apikey=' + apiKey
         fetch(url)
         .then(response => response.json())
-        .then(response => component.setState ({uniqueSearch:response.Search}))
+        .then(response => { component.setState ({uniqueSearch:response}); console.log(response);})
         .catch (err => console.log(err))
-
-        console.log(this.state.uniqueSearch)
     }
 
+    //Handle the movie user wants
     handleQueryInput(event) {
         this.setState({searchInput: event.target.value})
     }
 
+    //Fetch call for the movie title
     handleSearch() {
         const component = this
         const apiKey = '749d54f1'
-        const url = 'https://www.omdbapi.com/?i=tt3896198&apikey=' + apiKey + '&s=' + this.state.searchInput
+        const url = 'https://www.omdbapi.com/?s=' + this.state.searchInput + '&apikey=' + apiKey
         fetch(url)
         .then(response => response.json())
         .then(response => component.setState ({results:response.Search}))
         .catch (err => console.log(err))
+
     } 
 
     render() {       
@@ -55,6 +56,7 @@ class Search extends React.Component{
                 {this.state.results.map( (search, index) =>
                 <MoviePics search = {search} key = {index} selected = {this.handleDesiredSearch}/>,
                 )}
+                <Details search = {this.state.uniqueSearch} />
             </div>
         )
     }

@@ -6,42 +6,50 @@ import {
     Link
   } from "react-router-dom";
  
-const Details = (props) => {
-    const {Title:title, Type:type, Year:year, imdbID:id, Poster:pic} = props.search
-    console.log(props, type , year, id)
-    return (
-        <div>
-            <h2> BEM Movies </h2>
-            
-            <Router>
-                <Switch>
-                <Route path="/castandcrew">
-                    <Cast />
-                </Route>
-                <Route path="/trailers">
-                    <Trailers />
-                </Route>
-                {/* <Route path ="/store">
-                    <Store />
-                </Route> */}
-                <Route path="/">
-                    <Info />
-                </Route>
-                </Switch>
+class Details extends React.Component{
+    constructor(props) {
+        super(props);
+    }
+    
+    render() {
+        const {Title:title, Actors:actors, Director:director, Language: lang, Genre:genre, Rated: rating, 
+              Runtime:duration, Writer:writer, Released: rd, Plot:plot, Metascore: score, imdbRating:imdbrate, 
+              } = this.props.search;
+        const info = [title, lang, genre, rating, rd, plot, score ,imdbrate, writer]
+        console.log(info)
 
-                <nav>
-                    <ul>
-                        <p> <Link to="/">Details</Link> </p>
-                        <p> <Link to="/castandcrew">Cast and Crew</Link> </p>
-                        <p> <Link to="/trailers">Trailer</Link> </p>
-                        {/* <p> <Link to="/store">Store</Link> </p> */}
-                    </ul>
-                </nav>
+        return (
+            <div>
+                
+                <Router>
+                    <Switch>
+                    <Route path="/castandcrew">
+                        <Cast />
+                    </Route>
+                    <Route path="/trailers">
+                        <Trailers />
+                    </Route>
+                    {/* <Route path ="/store">
+                        <Store />
+                    </Route> */}
+                    <Route path="/">
+                        <Info desc = {info}/>
+                    </Route>
+                    </Switch>
 
-            </Router>
-        </div>
-    );
+                    <nav>
+                        <ul>
+                            <p> <Link to="/">Details</Link> </p>
+                            <p> <Link to="/castandcrew">Cast and Crew</Link> </p>
+                            <p> <Link to="/trailers">Trailer</Link> </p>
+                            {/* <p> <Link to="/store">Store</Link> </p> */}
+                        </ul>
+                    </nav>
 
+                </Router>
+            </div>
+        );
+    }
 }
  
 
@@ -73,13 +81,13 @@ function Trailers(props) {
     )
 }
 
-function Store(props) {
-    return(
-      <div>
-        <h2> Store </h2>
-        <p> {props.title} </p>
-      </div>
-    ) 
-}
+// function Store(props) {
+//     return(
+//       <div>
+//         <h2> Store </h2>
+//         <p> {props.title} </p>
+//       </div>
+//     ) 
+// }
 
 export default Details;
